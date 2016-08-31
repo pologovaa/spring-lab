@@ -1,5 +1,8 @@
 package factory;
 
+import factory.injectrandomdata.InjectRandomData;
+import factory.injectrandomdata.TextType;
+
 import java.time.LocalDate;
 
 /**

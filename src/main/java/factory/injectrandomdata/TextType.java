@@ -1,4 +1,4 @@
-package factory;
+package factory.injectrandomdata;
 
 import org.fluttercode.datafactory.impl.DataFactory;
 

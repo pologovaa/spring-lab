@@ -1,7 +1,7 @@
-package factory;
+package factory.injectrandomdata;
 
+import factory.ObjectConfigurator;
 import lombok.SneakyThrows;
-import org.fluttercode.datafactory.impl.DataFactory;
 import org.reflections.ReflectionUtils;
 import org.reflections.Reflections;
 

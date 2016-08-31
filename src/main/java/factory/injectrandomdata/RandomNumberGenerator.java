@@ -1,4 +1,4 @@
-package factory;
+package factory.injectrandomdata;
 
 import java.util.concurrent.ThreadLocalRandom;
 
