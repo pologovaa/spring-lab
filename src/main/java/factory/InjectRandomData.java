@@ -7,8 +7,10 @@ import java.lang.annotation.Target;
 
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)
-public @interface InjectRandomInt {
-    int min();
-    int max();
-
+public @interface InjectRandomData {
+    int min() default 0;
+    int max() default 0;
+    String minDate() default "";
+    String maxDate() default "";
+    TextType type() default TextType.DEFAULT;
 }

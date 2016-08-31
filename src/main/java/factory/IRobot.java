@@ -9,7 +9,7 @@ import java.lang.ref.WeakReference;
  * Created by Jeka on 24/08/2016.
  */
 @Benchmark
-@Singleton(lazy = false)
+//@Singleton(lazy = false)
 @Getter
 public class IRobot {
 
