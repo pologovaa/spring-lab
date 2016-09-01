@@ -41,7 +41,7 @@ public class IRobot {
         System.out.println(cleaner.getClass().getName());
     }
 
-    @Scheduled(from = "2016-09-01T12:30", to = "2016-09-01T15:56:00", frequency = 2, timeUnit = TimeUnit.SECONDS)
+    @Scheduled(from = "2016-09-01T12:30", frequency = 2, timeUnit = TimeUnit.SECONDS)
     //@Async
     @Benchmark
     public void cleanRoom(){

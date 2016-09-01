@@ -2,7 +2,8 @@ package factory.benchmark;
 
 import factory.context.ProxyConfigurator;
 import lombok.SneakyThrows;
-import org.springframework.cglib.proxy.Enhancer;
+import net.sf.cglib.proxy.Enhancer;
+import net.sf.cglib.proxy.InvocationHandler;
 
 import javax.management.MBeanServer;
 import javax.management.ObjectName;
@@ -35,7 +36,7 @@ public class BenchmarkProxyConfigurator implements ProxyConfigurator {
         }
         if (type.isAnnotationPresent(Benchmark.class) || isOneOfTheMethodsAnnotatedWithBenchmark) {
             if (type.getInterfaces().length == 0) {
-                return Enhancer.create(type, (org.springframework.cglib.proxy.InvocationHandler) (proxy, method, args) -> invocationHandlerInvoke(t, type, method, args));
+                return Enhancer.create(type, (InvocationHandler) (proxy, method, args) -> invocationHandlerInvoke(t, type, method, args));
             }else {
                 return Proxy.newProxyInstance(type.getClassLoader(), type.getInterfaces(), (proxy, method, args) -> invocationHandlerInvoke(t, type, method, args));
             }

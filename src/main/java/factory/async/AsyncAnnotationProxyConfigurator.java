@@ -1,8 +1,10 @@
 package factory.async;
 
 import factory.context.ProxyConfigurator;
+import net.sf.cglib.proxy.Enhancer;
+import net.sf.cglib.proxy.InvocationHandler;
 import org.reflections.ReflectionUtils;
-import org.springframework.cglib.proxy.Enhancer;
+//import org.springframework.cglib.proxy.Enhancer;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -21,7 +23,7 @@ public class AsyncAnnotationProxyConfigurator implements ProxyConfigurator {
         Set<Method> methods = ReflectionUtils.getAllMethods(type, method -> method.isAnnotationPresent(Async.class));
         if (!methods.isEmpty()) {
             if (type.getInterfaces().length == 0) {
-                return Enhancer.create(type, (org.springframework.cglib.proxy.InvocationHandler) (proxy, method, args) -> invocationHandlerInvoke(t, type, method, args));
+                return Enhancer.create(type, (InvocationHandler) (proxy, method, args) -> invocationHandlerInvoke(t, type, method, args));
             }else {
                 return Proxy.newProxyInstance(type.getClassLoader(), type.getInterfaces(), (proxy, method, args) -> invocationHandlerInvoke(t, type, method, args));
             }

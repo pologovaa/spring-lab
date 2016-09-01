@@ -14,7 +14,7 @@ import java.util.*;
  */
 public class InjectRandomDataAnnotationObjectConfigurator implements ObjectConfigurator {
     private Map<Class, RandomDataGenerator> generatorMap = new HashMap<>();
-    private Reflections reflections = new Reflections("factory");
+    private Reflections reflections = new Reflections();
 
     @SneakyThrows
     public InjectRandomDataAnnotationObjectConfigurator() {
