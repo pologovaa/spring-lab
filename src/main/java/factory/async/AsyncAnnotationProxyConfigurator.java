@@ -8,6 +8,9 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 import java.util.Set;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
 /**
  * Created by JavaSchoolSdudent on 01.09.2016.
@@ -29,9 +32,11 @@ public class AsyncAnnotationProxyConfigurator implements ProxyConfigurator {
     private Object invocationHandlerInvoke(Object t, Class type, Method method, Object[] args) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
         Method originalClassMethod = type.getMethod(method.getName(), method.getParameterTypes());
         if (originalClassMethod.isAnnotationPresent(Async.class)) {
-            //TODO: execute in another thread
             System.out.println("Executing asyncronously");
-            return method.invoke(t, args);
+            ExecutorService executorService = Executors.newSingleThreadExecutor();
+            Future<Object> future = executorService.submit(() -> method.invoke(t, args));
+            return future; //TODO future?
+//            return method.invoke(t, args);
         } else {
             return method.invoke(t, args);
         }

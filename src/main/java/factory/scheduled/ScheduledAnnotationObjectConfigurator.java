@@ -5,6 +5,8 @@ import org.reflections.ReflectionUtils;
 
 import java.lang.reflect.Method;
 import java.util.Set;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
 /**
  * Created by JavaSchoolSdudent on 01.09.2016.
@@ -14,7 +16,7 @@ public class ScheduledAnnotationObjectConfigurator implements ObjectConfigurator
 
     public ScheduledAnnotationObjectConfigurator() {
         taskManager = new ScheduledTaskManagerImpl();
-        new Thread(taskManager::run).start();
+        Future<?> future = Executors.newSingleThreadExecutor().submit(taskManager::run);
     }
 
     @Override

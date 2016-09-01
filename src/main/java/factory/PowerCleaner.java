@@ -22,9 +22,6 @@ public class PowerCleaner implements Cleaner {
     @Override
     @Benchmark
     public void clean() {
-        System.out.println(LocalDate.now());
-        System.out.println(LocalDate.now().plusMonths(3));
-
         for (int i = 0; i < repeat; i++) {
             System.out.println("VVVVVVVVVVvv   " + name + " " + date);
         }

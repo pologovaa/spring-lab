@@ -1,6 +1,7 @@
 package factory.context;
 
 import factory.*;
+import factory.postproxy.PostProxy;
 import factory.singleton.Singleton;
 import lombok.Getter;
 import lombok.SneakyThrows;
@@ -8,6 +9,7 @@ import org.reflections.ReflectionUtils;
 import org.reflections.Reflections;
 
 import javax.annotation.PostConstruct;
+import java.lang.annotation.Annotation;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
@@ -62,11 +64,13 @@ public class ObjectFactory {
         return instantiate(type);
     }
 
-    private <T> T instantiate(Class<T> type) throws Exception {
+    @SneakyThrows
+    private <T> T instantiate(Class<T> type) {
         T t = type.newInstance();
         configure(t);
         invokeInitMethods(type, t);
         t = wrapWithProxy(type, t);
+        invokePostProxyMethods(type, t);
         return t;
     }
 
@@ -75,11 +79,20 @@ public class ObjectFactory {
             Class implClass = config.getImplClass(type);
             if (implClass == null) {
                 Set<Class<? extends T>> classes = scanner.getSubTypesOf(type);
-                if (classes.size() != 1) {
-                    //// TODO: 24/08/2016 сделайте хорошо
-                    throw new RuntimeException("0 or more than one impl found for " + type + " bind needed impl in your config");
+                List<Class<? extends T>> notAbstract = new ArrayList<>();
+                for (Class<? extends T> aClass : classes) {
+                    if (!Modifier.isAbstract(aClass.getModifiers())) {
+                        notAbstract.add(aClass);
+                    }
                 }
-                type = (Class<T>) classes.iterator().next();
+                if (notAbstract.size() == 0) {
+                    throw new IllegalStateException("No implementations were found for " + type + ". Bind needed in your config.");
+                }
+                if (notAbstract.size() > 1) {
+                    throw new IllegalStateException("More than one implementations were found for " + type + ": "
+                            + notAbstract + ". Bind needed in your config");
+                }
+                type = (Class<T>) notAbstract.get(0);
             } else {
                 type = implClass;
             }
@@ -95,13 +108,22 @@ public class ObjectFactory {
         return t;
     }
 
+    private <T> void invokeInitMethods(Class<T> type, T t) {
+        invokeMethodAnnotatedWith(type, t, PostConstruct.class);
+    }
 
-    private <T> void invokeInitMethods(Class<T> type, T t) throws IllegalAccessException, InvocationTargetException {
-        Set<Method> methods = ReflectionUtils.getAllMethods(type, method -> method.isAnnotationPresent(PostConstruct.class));
+    private <T> void invokePostProxyMethods(Class<T> type, T t) {
+        invokeMethodAnnotatedWith(type, t, PostProxy.class);
+    }
+
+    @SneakyThrows
+    private <T> void invokeMethodAnnotatedWith(Class<T> type, T t, Class<? extends Annotation> annotationClass) {
+        Set<Method> methods = ReflectionUtils.getAllMethods(type, method -> method.isAnnotationPresent(annotationClass));
         for (Method method : methods) {
             method.invoke(t);
         }
     }
+
 
 
     private <T> void configure(T t) throws Exception {
