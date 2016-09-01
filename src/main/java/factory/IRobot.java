@@ -16,7 +16,7 @@ import java.util.concurrent.TimeUnit;
  * Created by Jeka on 24/08/2016.
  */
 @Benchmark
-@Singleton
+@Singleton(lazy = true)
 @Getter
 public class IRobot {
 

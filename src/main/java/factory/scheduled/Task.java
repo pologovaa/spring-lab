@@ -19,12 +19,12 @@ public class Task {
     private LocalDateTime toTime;
     private int frequency;
     private TimeUnit timeUnit;
-    private boolean isBeingExecuted = false;
 
 
-    public Task(Object object, Method method, Scheduled annotation) {
+    public Task(Object object, Method method) {
         this.object = object;
         this.method = method;
+        Scheduled annotation = method.getAnnotation(Scheduled.class);
         this.fromTime = LocalDateTime.parse(annotation.from());
         this.toTime = LocalDateTime.parse(annotation.to());
         this.frequency = annotation.frequency();
