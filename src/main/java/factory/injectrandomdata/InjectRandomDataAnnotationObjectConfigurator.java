@@ -1,6 +1,6 @@
 package factory.injectrandomdata;
 
-import factory.ObjectConfigurator;
+import factory.context.ObjectConfigurator;
 import lombok.SneakyThrows;
 import org.reflections.ReflectionUtils;
 import org.reflections.Reflections;

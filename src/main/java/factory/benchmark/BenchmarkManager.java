@@ -1,4 +1,4 @@
-package factory;
+package factory.benchmark;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -9,5 +9,5 @@ import lombok.Setter;
 @Getter
 @Setter
 public class BenchmarkManager implements BenchmarkManagerMBean {
-    private boolean enabled;
+    private boolean enabled = true;
 }

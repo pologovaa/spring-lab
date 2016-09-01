@@ -1,6 +1,6 @@
-package factory;
+package factory.injectbytype;
 
-import factory.context.ApplicationContext;
+import factory.context.ObjectConfigurator;
 import factory.context.ObjectFactory;
 import org.reflections.ReflectionUtils;
 

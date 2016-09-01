@@ -1,4 +1,4 @@
-package factory;
+package factory.benchmark;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;

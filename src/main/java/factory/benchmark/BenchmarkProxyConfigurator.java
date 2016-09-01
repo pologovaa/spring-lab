@@ -1,5 +1,6 @@
-package factory;
+package factory.benchmark;
 
+import factory.context.ProxyConfigurator;
 import lombok.SneakyThrows;
 import org.springframework.cglib.proxy.Enhancer;
 

@@ -1,4 +1,4 @@
-package factory;
+package factory.context;
 
 /**
  * Created by Jeka on 24/08/2016.

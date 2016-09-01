@@ -1,5 +1,6 @@
 package factory;
 
+import factory.benchmark.Benchmark;
 import factory.injectrandomdata.InjectRandomData;
 import factory.injectrandomdata.TextType;
 

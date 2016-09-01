@@ -1,6 +1,7 @@
 package factory.context;
 
 import factory.*;
+import factory.singleton.Singleton;
 import lombok.Getter;
 import lombok.SneakyThrows;
 import org.reflections.ReflectionUtils;

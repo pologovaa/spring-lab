@@ -8,13 +8,10 @@ import factory.context.ApplicationContext;
 public class Main {
     public static void main(String[] args) throws InterruptedException {
         while (true) {
-            IRobot iRobot = ApplicationContext.getInstance().createObject(IRobot.class);
-            System.out.println(iRobot);
-            iRobot.cleanRoom();
+            IRobot robot = ApplicationContext.getInstance().createObject(IRobot.class);
+            System.out.println(robot);
+            robot.cleanRoom();
             Thread.sleep(2000);
         }
-      /*  MyService<Integer> service = ObjectFactory.getInstance().createObject(MyService.class);
-        service.a(12);
-        service.b();*/
     }
 }

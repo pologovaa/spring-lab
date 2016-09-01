@@ -1,13 +1,8 @@
 package factory.context;
 
-import factory.Config;
-import factory.JavaConfig;
-import factory.Singleton;
-import lombok.Getter;
+import factory.singleton.Singleton;
 import org.reflections.Reflections;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Set;
 
 /**
@@ -25,6 +20,7 @@ public class ApplicationContext {
 
     private ApplicationContext() {
         objectFactory = ObjectFactory.getInstance();
+
         Set<Class<?>> singletons = scanner.getTypesAnnotatedWith(Singleton.class);
         for (Class<?> singleton : singletons) {
             Singleton annotation = singleton.getAnnotation(Singleton.class);
@@ -32,20 +28,11 @@ public class ApplicationContext {
                 objectFactory.getSingletonsMap().put(singleton, objectFactory.createObject(singleton));
             }
         }
+        System.out.println("Application context created");
     }
 
     public <T> T createObject(Class<T> type) {
         return objectFactory.createObject(type);
     }
-
-/*    public <T> T createObject(Class<T> type) {
-        type = resolveImpl(type);
-        if (type.isAnnotationPresent(Singleton.class) && singletonsMap.containsKey(type)) {
-            return (T) singletonsMap.get(type);
-        }
-        T t = objectFactory.createObject(type);
-        singletonsMap.put(type, t);
-        return t;
-    } */
 
 }

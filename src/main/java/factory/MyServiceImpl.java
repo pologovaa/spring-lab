@@ -1,5 +1,7 @@
 package factory;
 
+import factory.benchmark.Benchmark;
+
 /**
  * Created by Jeka on 24/08/2016.
  */

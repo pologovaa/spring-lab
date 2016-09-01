@@ -1,4 +1,4 @@
-package factory;
+package factory.benchmark;
 
 /**
  * Created by Jeka on 24/08/2016.

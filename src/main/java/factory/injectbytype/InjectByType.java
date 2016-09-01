@@ -1,4 +1,4 @@
-package factory;
+package factory.injectbytype;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
