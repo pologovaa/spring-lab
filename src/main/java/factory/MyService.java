@@ -1,24 +1,24 @@
 package factory;
 
 import factory.cache.Cache;
+import factory.injectspringbean.InjectSpringBean;
 import factory.singleton.Singleton;
-import org.fluttercode.datafactory.impl.DataFactory;
 
 /**
  * Created by JavaSchoolSdudent on 01.09.2016.
  */
 @Singleton
 public class MyService {
-    private DataFactory dataFactory = new DataFactory();
-
+    @InjectSpringBean
+    private MyDao dao;// = new MyDao();
 
     @Cache(duration = 500)
     public String getAddress() {
-        return dataFactory.getAddress();
+        return dao.getAddress();
     }
 
-//    @Cache
+    @Cache
     public String getName() {
-        return dataFactory.getName();
+        return dao.getName();
     }
 }

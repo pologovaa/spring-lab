@@ -1,6 +1,8 @@
 package factory.context;
 
 import factory.singleton.Singleton;
+import lombok.Getter;
+import lombok.Setter;
 import org.reflections.Reflections;
 
 import java.util.Set;
@@ -9,18 +11,30 @@ import java.util.Set;
  * Created by JavaSchoolSdudent on 31.08.2016.
  */
 public class ApplicationContext {
-    private static ApplicationContext context = new ApplicationContext();
+//    @Setter
+//    @Getter
+//    private org.springframework.context.ApplicationContext springContext;
+//    private static ApplicationContext context = new ApplicationContext();
 
-    public static ApplicationContext getInstance() {
-        return context;
-    }
+//    public static ApplicationContext getInstance() {
+//        return context;
+//    }
 
     private final ObjectFactory objectFactory;
     private Reflections scanner = new Reflections();
 
-    private ApplicationContext() {
+    public ApplicationContext(org.springframework.context.ApplicationContext springContext) {
         objectFactory = ObjectFactory.getInstance();
+        objectFactory.setSpringContext(springContext);
+        createEagerSingletons();
+    }
 
+    public ApplicationContext() {
+        objectFactory = ObjectFactory.getInstance();
+        createEagerSingletons();
+    }
+
+    private void createEagerSingletons() {
         Set<Class<?>> singletons = scanner.getTypesAnnotatedWith(Singleton.class);
         for (Class<?> singleton : singletons) {
             Singleton annotation = singleton.getAnnotation(Singleton.class);
@@ -28,7 +42,6 @@ public class ApplicationContext {
                 objectFactory.getSingletonsMap().put(singleton, objectFactory.createObject(singleton));
             }
         }
-        System.out.println("Application context created");
     }
 
     public <T> T createObject(Class<T> type) {

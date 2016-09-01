@@ -1,13 +1,15 @@
 package factory;
 
 import factory.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 /**
  * Created by Jeka on 24/08/2016.
  */
 public class Main {
     public static void main(String[] args) throws InterruptedException {
-        ApplicationContext context = ApplicationContext.getInstance();
+        AnnotationConfigApplicationContext springContext = new AnnotationConfigApplicationContext("factory");
+        ApplicationContext context = new ApplicationContext(springContext);
 
         MyService myService = context.createObject(MyService.class);
         for (int i = 0; i < 10; i++) {

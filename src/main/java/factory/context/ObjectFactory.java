@@ -4,9 +4,11 @@ import factory.*;
 import factory.postproxy.PostProxy;
 import factory.singleton.Singleton;
 import lombok.Getter;
+import lombok.Setter;
 import lombok.SneakyThrows;
 import org.reflections.ReflectionUtils;
 import org.reflections.Reflections;
+import org.springframework.context.*;
 
 import javax.annotation.PostConstruct;
 import java.lang.annotation.Annotation;
@@ -23,6 +25,9 @@ public class ObjectFactory {
     private List<ObjectConfigurator> objectConfigurators = new ArrayList<>();
     private List<ProxyConfigurator> proxyConfigurators = new ArrayList<>();
     private Config config = new JavaConfig();
+    @Setter
+    @Getter
+    private org.springframework.context.ApplicationContext springContext;
 
     @Getter
     private Map<Class, Object> singletonsMap = new HashMap<>();
