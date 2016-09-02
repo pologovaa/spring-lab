@@ -1,8 +1,5 @@
 package db.com.koala.factory.context;
 
-import db.com.koala.factory.Config;
-import db.com.koala.factory.JavaConfig;
-import db.com.koala.factory.*;
 import db.com.koala.factory.postproxy.PostProxy;
 import db.com.koala.factory.singleton.Singleton;
 import lombok.Getter;
@@ -10,11 +7,9 @@ import lombok.Setter;
 import lombok.SneakyThrows;
 import org.reflections.ReflectionUtils;
 import org.reflections.Reflections;
-import org.springframework.context.*;
 
 import javax.annotation.PostConstruct;
 import java.lang.annotation.Annotation;
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.util.*;
@@ -26,7 +21,7 @@ public class ObjectFactory {
     private static ObjectFactory ourInstance = new ObjectFactory();
     private List<ObjectConfigurator> objectConfigurators = new ArrayList<>();
     private List<ProxyConfigurator> proxyConfigurators = new ArrayList<>();
-    private Config config = new JavaConfig();
+    private Config config;// = new JavaConfig();
     @Setter
     @Getter
     private org.springframework.context.ApplicationContext springContext;
@@ -53,6 +48,13 @@ public class ObjectFactory {
             if (!Modifier.isAbstract(aClass.getModifiers())) {
                 proxyConfigurators.add(aClass.newInstance());
             }
+        }
+        Set<Class<? extends Config>> configs = scanner.getSubTypesOf(Config.class);
+        if (configs.size() == 1) {
+            config = configs.iterator().next().newInstance();
+        }
+        if (configs.size() > 1) {
+            throw new IllegalStateException("There can not be more than one Koala config in one project");
         }
     }
 
@@ -83,7 +85,10 @@ public class ObjectFactory {
 
     private <T> Class<T> resolveImpl(Class<T> type) {
         if (type.isInterface()) {
-            Class implClass = config.getImplClass(type);
+            Class implClass = null;
+            if (config != null) {
+                implClass = config.getImplClass(type);
+            }
             if (implClass == null) {
                 Set<Class<? extends T>> classes = scanner.getSubTypesOf(type);
                 List<Class<? extends T>> notAbstract = new ArrayList<>();

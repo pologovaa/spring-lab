@@ -1,5 +1,7 @@
 package db.com.koala.factory;
 
+import db.com.koala.factory.context.Config;
+
 import java.util.HashMap;
 import java.util.Map;
 
