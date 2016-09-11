@@ -1,6 +1,5 @@
 package db.com.koala.factory.injectbytype;
 
-import db.com.koala.factory.context.ObjectFactory;
 import db.com.koala.factory.context.ObjectConfigurator;
 import db.com.koala.factory.context.ObjectFactory;
 import org.reflections.ReflectionUtils;

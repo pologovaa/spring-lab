@@ -1,6 +1,5 @@
 package db.com.koala.factory;
 
-import db.com.koala.factory.singleton.Singleton;
 import org.fluttercode.datafactory.impl.DataFactory;
 import org.springframework.stereotype.Component;
 

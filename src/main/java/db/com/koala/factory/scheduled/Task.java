@@ -1,6 +1,5 @@
 package db.com.koala.factory.scheduled;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import java.lang.reflect.Method;

@@ -1,7 +1,6 @@
 package db.com.koala.factory;
 
 import db.com.koala.factory.context.ApplicationContext;
-import db.com.koala.factory.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 /**

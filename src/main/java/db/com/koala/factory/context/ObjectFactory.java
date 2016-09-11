@@ -21,7 +21,7 @@ public class ObjectFactory {
     private static ObjectFactory ourInstance = new ObjectFactory();
     private List<ObjectConfigurator> objectConfigurators = new ArrayList<>();
     private List<ProxyConfigurator> proxyConfigurators = new ArrayList<>();
-    private Config config;// = new JavaConfig();
+    private Config config;
     @Setter
     @Getter
     private org.springframework.context.ApplicationContext springContext;

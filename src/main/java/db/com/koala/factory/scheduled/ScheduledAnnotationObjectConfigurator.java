@@ -1,7 +1,6 @@
 package db.com.koala.factory.scheduled;
 
 import db.com.koala.factory.context.ObjectConfigurator;
-import db.com.koala.factory.context.ObjectConfigurator;
 import org.reflections.ReflectionUtils;
 
 import java.lang.reflect.Method;

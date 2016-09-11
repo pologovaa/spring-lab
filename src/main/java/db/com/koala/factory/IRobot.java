@@ -1,6 +1,5 @@
 package db.com.koala.factory;
 
-import db.com.koala.factory.async.Async;
 import db.com.koala.factory.benchmark.Benchmark;
 import db.com.koala.factory.injectbytype.InjectByType;
 import db.com.koala.factory.postproxy.PostProxy;
@@ -8,8 +7,6 @@ import db.com.koala.factory.scheduled.Scheduled;
 import db.com.koala.factory.singleton.Singleton;
 import lombok.Getter;
 
-import javax.annotation.PostConstruct;
-import java.lang.ref.WeakReference;
 import java.util.concurrent.TimeUnit;
 
 /**

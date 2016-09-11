@@ -1,6 +1,5 @@
 package db.com.koala.factory.injectspringbean;
 
-import db.com.koala.factory.context.ObjectFactory;
 import db.com.koala.factory.context.ObjectConfigurator;
 import db.com.koala.factory.context.ObjectFactory;
 import org.reflections.ReflectionUtils;
@@ -16,7 +15,6 @@ import java.util.Set;
  * Created by Jeka on 24/08/2016.
  */
 public class InjectSpringBeanAnnotationObjectConfigurator implements ObjectConfigurator {
-//    private ApplicationContext springContext;// = factory.context.ApplicationContext.getInstance().getSpringContext();
 
     @Override
     public void configure(Object t) throws Exception {

@@ -1,25 +1,11 @@
 package db.com.koala.factory.context;
 
 import db.com.koala.factory.singleton.Singleton;
-import db.com.koala.factory.singleton.Singleton;
-import lombok.Getter;
-import lombok.Setter;
 import org.reflections.Reflections;
 
 import java.util.Set;
 
-/**
- * Created by JavaSchoolSdudent on 31.08.2016.
- */
 public class ApplicationContext {
-//    @Setter
-//    @Getter
-//    private org.springframework.context.ApplicationContext springContext;
-//    private static ApplicationContext context = new ApplicationContext();
-
-//    public static ApplicationContext getInstance() {
-//        return context;
-//    }
 
     private final ObjectFactory objectFactory;
     private Reflections scanner = new Reflections();

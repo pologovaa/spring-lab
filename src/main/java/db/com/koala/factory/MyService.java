@@ -10,7 +10,7 @@ import db.com.koala.factory.singleton.Singleton;
 @Singleton
 public class MyService {
     @InjectSpringBean
-    private MyDao dao;// = new MyDao();
+    private MyDao dao;
 
     @Cache(duration = 500)
     public String getAddress() {
